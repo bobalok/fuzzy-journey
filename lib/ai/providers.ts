@@ -4,6 +4,7 @@ import {
   wrapLanguageModel,
 } from 'ai';
 import { xai } from '@ai-sdk/xai';
+import { deepseek } from '@ai-sdk/deepseek';
 import { isTestEnvironment } from '../constants';
 import {
   artifactModel,
@@ -30,6 +31,13 @@ export const myProvider = isTestEnvironment
         }),
         'title-model': xai('grok-2-1212'),
         'artifact-model': xai('grok-2-1212'),
+
+        // DeepSeek models
+        'deepseek-chat': deepseek('deepseek-chat'),
+        'deepseek-reasoning': wrapLanguageModel({
+          model: deepseek('deepseek-reasoner'),
+          middleware: extractReasoningMiddleware({ tagName: 'think' }),
+        }),
       },
       imageModels: {
         'small-model': xai.image('grok-2-image'),
