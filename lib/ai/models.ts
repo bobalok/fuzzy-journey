@@ -17,4 +17,14 @@ export const chatModels: Array<ChatModel> = [
     name: 'Reasoning model',
     description: 'Uses advanced reasoning',
   },
+  {
+    id: 'deepseek-chat',
+    name: 'DeepSeek Chat',
+    description: 'DeepSeek Chat model',
+  },
+  {
+    id: 'deepseek-reasoning',
+    name: 'DeepSeek Reasoning',
+    description: 'DeepSeek model with reasoning capabilities',
+  },
 ];
