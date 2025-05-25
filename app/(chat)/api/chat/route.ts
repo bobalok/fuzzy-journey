@@ -146,13 +146,22 @@ export async function POST(request: Request) {
 
     const stream = createDataStream({
       execute: (dataStream) => {
+        // Check if using DeepSeek model without API key
+        const isDeepSeekModel = selectedChatModel.startsWith('deepseek-');
+        if (isDeepSeekModel && !process.env.DEEPSEEK_API_KEY) {
+          throw new Error(
+            'Missing DEEPSEEK_API_KEY environment variable. Please check your configuration.',
+          );
+        }
+
         const result = streamText({
           model: myProvider.languageModel(selectedChatModel),
           system: systemPrompt({ selectedChatModel, requestHints }),
           messages,
           maxSteps: 5,
           experimental_activeTools:
-            selectedChatModel === 'chat-model-reasoning'
+            selectedChatModel === 'chat-model-reasoning' ||
+            selectedChatModel === 'deepseek-reasoning'
               ? []
               : [
                   'getWeather',
