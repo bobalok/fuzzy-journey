@@ -28,6 +28,11 @@ export const postRequestBodySchema = z.object({
     'chat-model-reasoning',
     'deepseek-chat',
     'deepseek-reasoning',
+    'openrouter-gpt4',
+    'openrouter-gpt4-reasoning',
+    'openrouter-claude',
+    'openrouter-llama',
+    'openrouter-mistral',
   ]),
   selectedVisibilityType: z.enum(['public', 'private']),
 });

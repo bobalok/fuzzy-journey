@@ -5,6 +5,7 @@ import {
 } from 'ai';
 import { xai } from '@ai-sdk/xai';
 import { deepseek } from '@ai-sdk/deepseek';
+import { openrouter } from './providers/openrouter';
 import { isTestEnvironment } from '../constants';
 import {
   artifactModel,
@@ -38,6 +39,16 @@ export const myProvider = isTestEnvironment
           model: deepseek('deepseek-reasoner'),
           middleware: extractReasoningMiddleware({ tagName: 'think' }),
         }),
+
+        // OpenRouter models
+        'openrouter-gpt4': openrouter('openai/gpt-4-turbo'),
+        'openrouter-gpt4-reasoning': wrapLanguageModel({
+          model: openrouter('openai/gpt-4-turbo'),
+          middleware: extractReasoningMiddleware({ tagName: 'think' }),
+        }),
+        'openrouter-claude': openrouter('anthropic/claude-3-opus'),
+        'openrouter-llama': openrouter('meta/llama-3-70b-instruct'),
+        'openrouter-mistral': openrouter('mistralai/mistral-large'),
       },
       imageModels: {
         'small-model': xai.image('grok-2-image'),

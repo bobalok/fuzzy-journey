@@ -12,7 +12,15 @@ export const entitlementsByUserType: Record<UserType, Entitlements> = {
    */
   guest: {
     maxMessagesPerDay: 20,
-    availableChatModelIds: ['chat-model', 'chat-model-reasoning'],
+    availableChatModelIds: [
+      'chat-model',
+      'chat-model-reasoning',
+      'openrouter-gpt4',
+      'openrouter-gpt4-reasoning',
+      'openrouter-claude',
+      'openrouter-llama',
+      'openrouter-mistral',
+    ],
   },
 
   /*
@@ -25,6 +33,11 @@ export const entitlementsByUserType: Record<UserType, Entitlements> = {
       'chat-model-reasoning',
       'deepseek-chat',
       'deepseek-reasoning',
+      'openrouter-gpt4',
+      'openrouter-gpt4-reasoning',
+      'openrouter-claude',
+      'openrouter-llama',
+      'openrouter-mistral',
     ],
   },
 

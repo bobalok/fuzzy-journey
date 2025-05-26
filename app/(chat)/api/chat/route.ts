@@ -154,6 +154,14 @@ export async function POST(request: Request) {
           );
         }
 
+        // Check if using OpenRouter model without API key
+        const isOpenRouterModel = selectedChatModel.startsWith('openrouter-');
+        if (isOpenRouterModel && !process.env.OPENROUTER_API_KEY) {
+          throw new Error(
+            'Missing OPENROUTER_API_KEY environment variable. Please check your configuration.',
+          );
+        }
+
         const result = streamText({
           model: myProvider.languageModel(selectedChatModel),
           system: systemPrompt({ selectedChatModel, requestHints }),
