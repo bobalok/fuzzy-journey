@@ -3,11 +3,6 @@ description:
 globs: 
 alwaysApply: true
 ---
----
-description: 
-globs: 
-alwaysApply: false
----
 # Tiger.Chat Codebase Rules
 
 ## Tech Stack

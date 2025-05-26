@@ -1,3 +1,6 @@
+---
+applyTo: '**'
+---
 # AI Model Integration Guidelines for Tiger.Chat
 
 ## Overview
