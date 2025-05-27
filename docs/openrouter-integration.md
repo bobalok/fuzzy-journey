@@ -36,6 +36,7 @@ The integration includes the following models:
 | openrouter-gpt4 | GPT-4 Turbo | OpenAI | OpenAI's GPT-4 Turbo via OpenRouter |
 | openrouter-gpt4-reasoning | GPT-4 Turbo (Reasoning) | OpenAI | GPT-4 Turbo with reasoning capabilities |
 | openrouter-claude | Claude 3 Opus | Anthropic | Anthropic's Claude 3 Opus model |
+| openrouter-claude-sonnet | Claude 3.7 Sonnet | Anthropic | Anthropic's Claude 3.7 Sonnet model |
 | openrouter-llama | Llama 3 70B | Meta | Meta's Llama 3 70B model |
 | openrouter-mistral | Mistral Large | Mistral | Mistral Large model |
 

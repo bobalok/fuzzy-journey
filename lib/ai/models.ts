@@ -44,6 +44,11 @@ export const chatModels: Array<ChatModel> = [
     description: 'Anthropic Claude 3 Opus via OpenRouter',
   },
   {
+    id: 'openrouter-claude-sonnet',
+    name: 'Claude 3.7 Sonnet',
+    description: 'Anthropic Claude 3.7 Sonnet via OpenRouter',
+  },
+  {
     id: 'openrouter-llama',
     name: 'Llama 3 70B',
     description: 'Meta Llama 3 70B via OpenRouter',

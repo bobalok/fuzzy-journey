@@ -7,7 +7,6 @@ import { CodeBlock } from './code-block';
 const components: Partial<Components> = {
   // @ts-expect-error
   code: CodeBlock,
-  pre: ({ children }) => <>{children}</>,
   ol: ({ node, children, ...props }) => {
     return (
       <ol className="list-decimal list-outside ml-4" {...props}>
@@ -95,12 +94,36 @@ const components: Partial<Components> = {
 
 const remarkPlugins = [remarkGfm];
 
+// Create a wrapper function to catch and log any rendering errors
+const safeRenderMarkdown = (content: string) => {
+  try {
+    // Use key based on content to ensure React recreates the component when content changes
+    // This helps prevent hydration mismatches
+    return (
+      <div className="markdown-container">
+        <ReactMarkdown
+          key={`md-${content.substring(0, 20).replace(/\s/g, '-')}`}
+          remarkPlugins={remarkPlugins}
+          components={components}
+          skipHtml={true} // Skip HTML to avoid nesting issues
+        >
+          {content}
+        </ReactMarkdown>
+      </div>
+    );
+  } catch (error) {
+    console.error('Markdown rendering error:', error);
+    return <div className="text-red-500">Error rendering markdown content</div>;
+  }
+};
+
 const NonMemoizedMarkdown = ({ children }: { children: string }) => {
-  return (
-    <ReactMarkdown remarkPlugins={remarkPlugins} components={components}>
-      {children}
-    </ReactMarkdown>
-  );
+  // Handle undefined or null content gracefully
+  if (!children) {
+    return <div className="empty-markdown" />;
+  }
+
+  return safeRenderMarkdown(children);
 };
 
 export const Markdown = memo(

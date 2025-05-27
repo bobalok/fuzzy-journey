@@ -1,11 +1,42 @@
 ---
 applyTo: '**'
 ---
-# AI Model Integration Guidelines for Tiger.Chat
+# AI Model Integration Guidelines for Tig## API Integration
 
-## Overview
+**Location:** `app/(chat)/api/chat/route.ts`
+
+Required checks:
+
+- API key validation
+- Provider-specific error handling
+- Stream handling configuration
+- Rate limiting integration
+
+**Location:** `app/(chat)/api/chat/schema.ts` 
+
+Required updates:
+
+- Add the model ID to the `selectedChatModel` enum to ensure API validation accepts the model
+- Example:
+```typescript
+selectedChatModel: z.enum([
+  // existing models...
+  'openrouter-claude-sonnet', // New model
+]),
+```# Overview
 
 This document outlines the standards and procedures for integrating new AI models into Tiger.Chat. All new AI model integrations must follow these guidelines to maintain consistency and reliability across the application.
+
+## Complete Integration Checklist
+
+✅ Define model in `lib/ai/models.ts`  
+✅ Configure provider in `lib/ai/providers.ts`  
+✅ Update entitlements in `lib/ai/entitlements.ts`  
+✅ Add model ID to validation schema in `app/(chat)/api/chat/schema.ts`  
+✅ Create test script in `scripts/test-{model}.ts`  
+✅ Document integration in `docs/{model}-integration.md`  
+✅ Set up proper environment variables  
+✅ Test model selection in the UI  
 
 ## Model Integration Structure
 
@@ -14,7 +45,7 @@ This document outlines the standards and procedures for integrating new AI model
 - All API keys must be stored in environment variables
 - Add new API keys to both `.env.local` and `.env.example`
 - Update `next.config.ts` with new environment variables under `serverRuntimeConfig`
-- Follow the naming convention: `PROVIDER_API_KEY` (e.g., `DEEPSEEK_API_KEY`)
+- Follow the naming convention: `PROVIDER_API_KEY` (e.g., `DEEPSEEK_API_KEY`, `OPENROUTER_API_KEY`)
 
 ### 2. Provider Configuration
 
@@ -69,11 +100,30 @@ Required checks:
 - Test both chat and reasoning capabilities
 - Implement proper error handling
 - Test stream processing
+- Verify correct model path format (e.g., using hyphens for anthropic/claude-3-7-sonnet)
+
+Example test script structure:
+```typescript
+// scripts/test-claude-sonnet.ts
+import { streamText } from 'ai';
+import { openrouter } from '../lib/ai/providers/openrouter';
+
+const modelId = 'openrouter-claude-sonnet';
+const modelName = 'anthropic/claude-3-7-sonnet'; // Correct path format with hyphens
+
+const result = await streamText({
+  model: openrouter(modelName),
+  messages: [
+    { role: 'user', content: 'Your prompt here' }
+  ],
+});
+```
 
 ### 2. Integration Tests
 
 - Add E2E tests in `tests/e2e`
-- Test model selection
+- Test model selection in UI
+- Test API validation with the new model
 - Test error scenarios
 - Test streaming responses
 
@@ -114,19 +164,45 @@ for await (const chunk of result.textStream) {
 
 ### 1. Integration Documentation
 
-Create a Markdown file in `docs/` with:
+Create a Markdown file in `docs/{model}-integration.md` with:
 
 - Setup instructions
 - Configuration details
+- Files modified during integration (complete list)
 - Usage examples
-- Troubleshooting guide
+- Troubleshooting guide including common issues
 - API reference
+
+Example documentation structure:
+```markdown
+# Model Integration
+
+## Overview
+Brief description of the model and its capabilities
+
+## Integration Details
+- Model Name: Display name
+- Model ID: ID used in Tiger.Chat
+- Provider Path: Exact path used with provider (e.g., anthropic/claude-3-7-sonnet)
+
+## Configuration
+### Files Modified
+1. `lib/ai/models.ts` - Added model definition
+2. `lib/ai/providers.ts` - Added provider mapping
+3. `lib/ai/entitlements.ts` - Updated entitlements
+4. `app/(chat)/api/chat/schema.ts` - Updated validation schema
+
+## Troubleshooting
+### Common Issues
+- List of common issues and their solutions
+```
 
 ### 2. Code Comments
 
 - Add JSDoc comments for public functions
 - Document error handling approaches
 - Explain provider-specific configurations
+- Include comments about required validation steps
 
 ## Security Guidelines
 
@@ -198,8 +274,10 @@ Create a Markdown file in `docs/` with:
 - [ ] E2E tests passing
 - [ ] Load testing completed
 - [ ] Documentation reviewed
+- [ ] API validation in schema.ts verified
 - [ ] Security scan completed
 - [ ] Performance metrics reviewed
+- [ ] Manual testing of model selection completed
 
 ## Version Control
 
@@ -222,6 +300,8 @@ Create a Markdown file in `docs/` with:
 - API key configuration
 - Rate limiting
 - Stream processing
+- Schema validation errors
+- Model path format issues (e.g., using periods instead of hyphens)
 - Error handling
 
 ### Debugging
@@ -229,3 +309,16 @@ Create a Markdown file in `docs/` with:
 - Enable debug logging
 - Monitor stream states
 - Track API responses
+- Use the test script to verify model connectivity
+- Check browser console for validation errors
+- Verify schema.ts includes the model ID
+
+## Lessons from Previous Issues
+
+### Claude 3.7 Sonnet Integration Fix (May 2025)
+
+- **Issue**: Model ID missing from API validation schema causing requests to be rejected
+- **Root Cause**: Incomplete model integration - schema.ts not updated
+- **Resolution**: Added model ID to `selectedChatModel` enum in schema.ts
+- **Key Learning**: Always ensure model IDs are added to all validation schemas
+- **Prevention**: Follow the complete integration checklist at the top of this document

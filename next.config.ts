@@ -15,6 +15,7 @@ const nextConfig: NextConfig = {
     // Server-only environment variables
     DEEPSEEK_API_KEY: process.env.DEEPSEEK_API_KEY,
     OPENROUTER_API_KEY: process.env.OPENROUTER_API_KEY,
+    // BLOB_READ_WRITE_TOKEN: process.env.BLOB_READ_WRITE_TOKEN,
   },
 };
 

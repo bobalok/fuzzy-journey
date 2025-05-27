@@ -47,6 +47,7 @@ export const myProvider = isTestEnvironment
           middleware: extractReasoningMiddleware({ tagName: 'think' }),
         }),
         'openrouter-claude': openrouter('anthropic/claude-3-opus'),
+        'openrouter-claude-sonnet': openrouter('anthropic/claude-3-7-sonnet'),
         'openrouter-llama': openrouter('meta/llama-3-70b-instruct'),
         'openrouter-mistral': openrouter('mistralai/mistral-large'),
       },

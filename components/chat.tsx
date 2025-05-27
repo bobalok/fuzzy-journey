@@ -153,6 +153,8 @@ export function Chat({
               setMessages={setMessages}
               append={append}
               selectedVisibilityType={visibilityType}
+              session={session}
+              selectedModelId={initialChatModel}
             />
           )}
         </form>
@@ -174,6 +176,8 @@ export function Chat({
         votes={votes}
         isReadonly={isReadonly}
         selectedVisibilityType={visibilityType}
+        session={session}
+        selectedModelId={initialChatModel}
       />
     </>
   );

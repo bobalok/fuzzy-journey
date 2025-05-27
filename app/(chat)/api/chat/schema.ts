@@ -31,6 +31,7 @@ export const postRequestBodySchema = z.object({
     'openrouter-gpt4',
     'openrouter-gpt4-reasoning',
     'openrouter-claude',
+    'openrouter-claude-sonnet',
     'openrouter-llama',
     'openrouter-mistral',
   ]),
