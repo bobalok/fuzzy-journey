@@ -24,7 +24,7 @@ export default function Page() {
     },
   );
 
-  const { update: updateSession } = useSession();
+  const { data: session, update: updateSession } = useSession();
 
   useEffect(() => {
     if (state.status === 'user_exists') {
@@ -43,7 +43,14 @@ export default function Page() {
       updateSession();
       router.refresh();
     }
-  }, [state]);
+  }, [state, router, updateSession]);
+
+  useEffect(() => {
+    if (session) {
+      updateSession();
+      router.replace('/');
+    }
+  }, [session, router, updateSession]);
 
   const handleSubmit = (formData: FormData) => {
     setEmail(formData.get('email') as string);
