@@ -24,7 +24,7 @@ export default function Page() {
     },
   );
 
-  const { update: updateSession, data: session } = useSession();
+  const { update: updateSession } = useSession();
 
   useEffect(() => {
     if (state.status === 'failed') {
@@ -42,14 +42,7 @@ export default function Page() {
       updateSession();
       router.refresh();
     }
-  }, [state.status, router, updateSession]);
-
-  useEffect(() => {
-    if (session) {
-      updateSession();
-      router.replace('/');
-    }
-  }, [session, router, updateSession]);
+  }, [state.status]);
 
   const handleSubmit = (formData: FormData) => {
     setEmail(formData.get('email') as string);
