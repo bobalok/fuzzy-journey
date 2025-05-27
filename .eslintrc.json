@@ -3,13 +3,18 @@
     "next/core-web-vitals",
     "plugin:import/recommended",
     "plugin:import/typescript",
-    "prettier",
-    "plugin:tailwindcss/recommended"
+    "prettier"
+    // Temporarily disabled due to incompatibility with Tailwind CSS v4
+    // "plugin:tailwindcss/recommended"
   ],
-  "plugins": ["tailwindcss"],
+  "plugins": [
+    // Temporarily disabled due to incompatibility with Tailwind CSS v4
+    // "tailwindcss"
+  ],
   "rules": {
-    "tailwindcss/no-custom-classname": "off",
-    "tailwindcss/classnames-order": "off"
+    // Temporarily disabled due to incompatibility with Tailwind CSS v4
+    // "tailwindcss/no-custom-classname": "off",
+    // "tailwindcss/classnames-order": "off"
   },
   "settings": {
     "import/resolver": {
