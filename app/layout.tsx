@@ -7,9 +7,15 @@ import './globals.css';
 import { SessionProvider } from 'next-auth/react';
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://chat.vercel.ai'),
-  title: 'Next.js Chatbot Template',
-  description: 'Next.js chatbot template using the AI SDK.',
+  title: 'Tiger.Chat',
+  description: 'AI Chat Assistant',
+  metadataBase: new URL(
+    process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : process.env.NODE_ENV === 'production'
+        ? 'https://your-production-url.com' // Replace with your actual production URL
+        : 'http://localhost:3000',
+  ),
 };
 
 export const viewport = {

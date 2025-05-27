@@ -56,7 +56,7 @@
   --color-sidebar-ring: hsl(var(--sidebar-ring));
 }
 
-/*
+/* 
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
   looks the same as it did with Tailwind CSS v3.
@@ -201,22 +201,22 @@
 
 .cm-editor,
 .cm-gutters {
-    @apply bg-background! dark:bg-zinc-800! outline-hidden! selection:bg-zinc-900!;
+    @apply bg-background dark:bg-zinc-800 outline-hidden selection:bg-zinc-900;
 }
 
 .ͼo.cm-focused > .cm-scroller > .cm-selectionLayer .cm-selectionBackground,
 .ͼo.cm-selectionBackground,
 .ͼo.cm-content::selection {
-    @apply bg-zinc-200! dark:bg-zinc-900!;
+    @apply bg-zinc-200 dark:bg-zinc-900;
 }
 
 .cm-activeLine,
 .cm-activeLineGutter {
-    @apply bg-transparent!;
+    @apply bg-transparent;
 }
 
 .cm-activeLine {
-    @apply rounded-r-sm!;
+    @apply rounded-r-sm;
 }
 
 .cm-lineNumbers {
@@ -228,7 +228,7 @@
 }
 
 .cm-lineNumbers .cm-activeLineGutter {
-    @apply rounded-l-sm!;
+    @apply rounded-l-sm;
 }
 
 .suggestion-highlight {
