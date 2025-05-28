@@ -50,16 +50,16 @@ export const config = {
     '/',
     '/chat/:id',
     '/api/:path*',
-    '!/api/auth/:path*', // Exclude NextAuth routes from middleware
     '/login',
     '/register',
 
     /*
      * Match all request paths except for the ones starting with:
+     * - api/auth (auth routes that should be handled by NextAuth)
      * - _next/static (static files)
      * - _next/image (image optimization files)
      * - favicon.ico, sitemap.xml, robots.txt (metadata files)
      */
-    '/((?!_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
+    '/((?!api/auth|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt).*)',
   ],
 };
