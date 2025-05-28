@@ -9,13 +9,12 @@ import { SessionProvider } from 'next-auth/react';
 export const metadata: Metadata = {
   title: 'Tiger.Chat',
   description: 'AI Chat Assistant',
-  // metadataBase: new URL(
-  //   process.env.VERCEL_URL
-  //     ? `https://${process.env.VERCEL_URL}`
-  //     : process.env.NODE_ENV === 'production'
-  //       ? 'https://baebar.store' // Replace with your actual production URL
-  //       : 'http://localhost:3000',
-  // ),
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ||
+      (process.env.NODE_ENV === 'production'
+        ? 'https://baebar.store' // Your production domain
+        : 'http://localhost:3000'),
+  ),
 };
 
 export const viewport = {
