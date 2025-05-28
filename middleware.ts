@@ -17,10 +17,15 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  // Skip authentication for login and register pages
+  if (['/login', '/register'].includes(pathname)) {
+    return NextResponse.next();
+  }
+
   const token = await getToken({
     req: request,
     secret: process.env.AUTH_SECRET,
-    secureCookie: !isProductionEnvironment,
+    secureCookie: isProductionEnvironment, // Fix: should be true in production
   });
 
   if (!token) {
@@ -45,6 +50,7 @@ export const config = {
     '/',
     '/chat/:id',
     '/api/:path*',
+    '!/api/auth/:path*', // Exclude NextAuth routes from middleware
     '/login',
     '/register',
 
