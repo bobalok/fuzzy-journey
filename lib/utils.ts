@@ -90,11 +90,11 @@ export function sanitizeText(text: string) {
   return text.replace('<has_function_call>', '');
 }
 
-export function getBaseUrl() {
-  if (typeof window !== 'undefined') {
-    return window.location.origin;
-  }
+// export function getBaseUrl() {
+//   if (typeof window !== 'undefined') {
+//     return window.location.origin;
+//   }
 
-  // For server-side
-  return process.env.NEXT_PUBLIC_BASE_URL || 'https://tiger.chat';
-}
+//   // For server-side
+//   return process.env.NEXT_PUBLIC_BASE_URL || 'https://tiger.chat';
+// }
