@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev --turbo",
     "build": "tsx lib/db/migrate && next build",
+    "build:production": "NODE_ENV=production pnpm db:migrate && next build",
     "start": "next start",
     "lint": "next lint && biome lint --write --unsafe",
     "lint:fix": "next lint --fix && biome lint --write --unsafe",
@@ -18,7 +19,10 @@
     "db:up": "drizzle-kit up",
     "test": "export PLAYWRIGHT=True && pnpm exec playwright test",
     "test:openrouter": "tsx scripts/test-openrouter.ts",
-    "test:openrouter:minimal": "tsx scripts/test-openrouter-minimal.ts"
+    "test:openrouter:minimal": "tsx scripts/test-openrouter-minimal.ts",
+    "test:xai": "tsx scripts/test-xai.ts",
+    "verify:env": "bash scripts/setup-production-env.sh",
+    "prepare:production": "pnpm verify:env && pnpm build:production"
   },
   "dependencies": {
     "@ai-sdk/deepseek": "^0.2.14",
